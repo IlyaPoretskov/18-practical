@@ -2,23 +2,21 @@
 
 using namespace std;
 
-int number_of_ways(int n, int k = 3)
+int n, k;
+
+int number_of_ways(int n, int i = 3)
 {
-    int count = 0;
-    for (int i = 1; i < k + 1; i++)
+    if (n == 0)
     {
-        for (int j = 1; j < k + 1; j++)
+        return 1;
+    } else {
+        if (n < 0 || i < 1)
         {
-            for (int h = 0; h < k + 1; h++)
-            {
-                if (i + j + h == n)
-                {
-                    count++;
-                }
-            }
+            return 0;
+        } else {
+            return number_of_ways(n - i, k) + number_of_ways(n, i - 1);
         }
-    }
-    return count;
+    }  
 }
 
 bool isdigit(const char* n)
@@ -47,7 +45,7 @@ int main()
         cin >> n_str >> k_str;
     }
     
-    int n = atoi(n_str), k = atoi(k_str);
+    n = atoi(n_str), k = atoi(k_str);
     
     cout << number_of_ways(n, k);
 }
